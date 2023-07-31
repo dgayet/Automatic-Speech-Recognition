@@ -31,7 +31,7 @@ def main():
 
     hparams={
         "n_cnn_layers": 2,
-        "n_rnn_layers": 3,
+        "n_rnn_layers": 4,
         "rnn_dim": 512,
         "n_class": 29,
         "n_feats": 128,
@@ -71,7 +71,7 @@ def main():
 
     # iter_meter = IterMeter()
     train(model, device, train_loader, criterion, optimizer, scheduler, test_loader, hparams['epochs'])
-    torch.save(model.state_dict(), './model')
+    torch.save(model.state_dict(), './model/best_model')
 
 
 

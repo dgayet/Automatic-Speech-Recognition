@@ -7,12 +7,11 @@ from Decoder import GreedyDecoder
 
 def train_step(model, device, train_loader, criterion, optimizer, scheduler, epoch):
     timings = []
-    t0 = t.time()
-
     model.train()
     train_loss, train_acc = 0, 0
     data_len = len(train_loader.dataset)
 
+    t0 = t.time()
     for batch_idx, _data in enumerate(train_loader):
         spectrograms, labels, input_lengths, label_lengths = _data
         spectrograms, labels = spectrograms.to(device), labels.to(device)
@@ -29,14 +28,11 @@ def train_step(model, device, train_loader, criterion, optimizer, scheduler, epo
         optimizer.step()
         scheduler.step()
 
-        timings.append[t.time() - t0]
-        if batch_idx % 100 == 0 or batch_idx == data_len:
+        dt = t.time() - t0
+        if batch_idx % 100 == 0 or batch_idx == data_len - 1:
             print('Train Epoch: {} [{}/{}] ({:.0f}%)]\tloss: {:.6f}\tTime (s): {:.4f}'.format(
-                epoch, batch_idx * len(spectrograms), data_len, 100.*batch_idx/len(train_loader), loss.item(), np.mean(timings)
+                epoch, batch_idx * len(spectrograms), data_len, 100.*batch_idx/len(train_loader), loss.item(), dt
             ))
-    train_loss = train_loss / len(train_loader)
-    print('Finished training: took {:.2f}s'.format(t.time()-t0))
-    return train_loss
 
 def test_step(model, device, test_loader, criterion, epoch):
     print('\nevaluating')
@@ -58,7 +54,7 @@ def test_step(model, device, test_loader, criterion, epoch):
 
             decoded_preds, decoded_targets = GreedyDecoder(output.transpose(0, 1), labels, label_lengths)
 
-            if I % 100 == 0 or I == data_test_len:
+            if I % 100 == 0 or I == data_test_len - 1:
                 print('Test Epoch: {} [{}/{}] ({:.0f}%)]\tloss: {:.6f}'.format(
                 epoch, I * len(spectrograms), data_test_len, 100.*I/len(test_loader), loss.item()
             ))
@@ -71,12 +67,18 @@ def test_step(model, device, test_loader, criterion, epoch):
                 if len(decoded_preds[j]) > 0:
                     test_cer.append(cer(decoded_targets[j], decoded_preds[j]))
 
+    avg_cer = sum(test_cer)/len(test_cer)
+
+    print('Test set: Average loss: {:.4f}, Average CER: {:4f}\n'.format(test_loss, avg_cer))
+    return test_loss
 
 def cer(pred, ref):
     return(jiwer.wer(ref,pred))
 
 def train(model, device, train_loader, criterion, optimizer, scheduler, test_loader, epochs):
+    t0 = t.time()
     for epoch in range(1, epochs + 1):
         train_step(model, device, train_loader, criterion, optimizer, scheduler, epoch)
         if (epoch % 10 == 0):
             test_step(model, device, test_loader, criterion, epoch)
+    print('Finished training: took {:.2f}s'.format(t.time()-t0))
