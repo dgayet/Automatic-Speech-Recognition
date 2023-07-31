@@ -5,15 +5,15 @@ import torchaudio.functional as F
 from Classes import *
 
 
-train_audio_transforms = nn.Sequential(
+
+
+def data_processing(data, data_type='train'):
+    train_audio_transforms = nn.Sequential(
     T.MelSpectrogram(sample_rate=16e3, n_mels=128),
     T.FrequencyMasking(freq_mask_param=15),
     T.TimeMasking(time_mask_param=35)
 )
-valid_audio_transforms = T.MelSpectrogram()
-
-
-def data_processing(data, data_type='train'):
+    valid_audio_transforms = T.MelSpectrogram()
     text_transform = TextTransforms()
     spectrograms = []
     labels = []

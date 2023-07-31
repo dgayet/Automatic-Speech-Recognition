@@ -1,9 +1,14 @@
 import torch
 import torch.nn as nn
 import jiwer
+import time as t
+import numpy as np
 from Decoder import GreedyDecoder
 
 def train_step(model, device, train_loader, criterion, optimizer, scheduler, epoch):
+    timings = []
+    t0 = t.time()
+
     model.train()
     train_loss, train_acc = 0, 0
     data_len = len(train_loader.dataset)
@@ -24,11 +29,13 @@ def train_step(model, device, train_loader, criterion, optimizer, scheduler, epo
         optimizer.step()
         scheduler.step()
 
+        timings.append[t.time() - t0]
         if batch_idx % 100 == 0 or batch_idx == data_len:
-            print('Train Epoch: {} [{}/{}] ({:.0f}%)]\tloss: {:.6f}'.format(
-                epoch, batch_idx * len(spectrograms), data_len, 100.*batch_idx/len(train_loader), loss.item()
+            print('Train Epoch: {} [{}/{}] ({:.0f}%)]\tloss: {:.6f}\tTime (s): {:.4f}'.format(
+                epoch, batch_idx * len(spectrograms), data_len, 100.*batch_idx/len(train_loader), loss.item(), np.mean(timings)
             ))
     train_loss = train_loss / len(train_loader)
+    print('Finished training: took {:.2f}s'.format(t.time()-t0))
     return train_loss
 
 def test_step(model, device, test_loader, criterion, epoch):
@@ -53,7 +60,7 @@ def test_step(model, device, test_loader, criterion, epoch):
 
             if I % 100 == 0 or I == data_test_len:
                 print('Test Epoch: {} [{}/{}] ({:.0f}%)]\tloss: {:.6f}'.format(
-                epoch, I * len(spectrograms), data_test_len, 100.*I/len(test_loader, loss.item())
+                epoch, I * len(spectrograms), data_test_len, 100.*I/len(test_loader), loss.item()
             ))
                 
             for j in range(len(decoded_preds)):
