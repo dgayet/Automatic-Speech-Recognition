@@ -9,7 +9,6 @@ def train_step(model, device, train_loader, criterion, optimizer, scheduler, epo
     data_len = len(train_loader.dataset)
 
     for batch_idx, _data in enumerate(train_loader):
-        print(batch_idx)
         spectrograms, labels, input_lengths, label_lengths = _data
         spectrograms, labels = spectrograms.to(device), labels.to(device)
 
@@ -27,7 +26,7 @@ def train_step(model, device, train_loader, criterion, optimizer, scheduler, epo
 
         if batch_idx % 100 == 0 or batch_idx == data_len:
             print('Train Epoch: {} [{}/{}] ({:.0f}%)]\tloss: {:.6f}'.format(
-                epoch, batch_idx * len(spectrograms), data_len, 100.*batch_idx/len(train_loader, loss.item())
+                epoch, batch_idx * len(spectrograms), data_len, 100.*batch_idx/len(train_loader), loss.item()
             ))
     train_loss = train_loss / len(train_loader)
     return train_loss

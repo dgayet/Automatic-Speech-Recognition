@@ -15,13 +15,14 @@ from engine import train
 
 # GPU computing
 use_cuda = False
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    use_cuda = True
-elif torch.backends.mps.is_available():
-    device = torch.device("mps")
-else:
-    device = torch.device("cpu")
+device = torch.device("cpu")
+# if torch.cuda.is_available():
+#     device = torch.device("cuda")
+#     use_cuda = True
+# elif torch.backends.mps.is_available():
+#     device = torch.device("mps")
+# else:
+#     device = torch.device("cpu")
 torch.manual_seed(7) 
 
 # Hiperparameters

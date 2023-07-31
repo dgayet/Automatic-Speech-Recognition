@@ -29,7 +29,6 @@ class ResidualCNN(nn.Module):
         self.layer_norm2 = CNNLayerNorm(n_feats)
 
     def forward(self, x):
-        print(x.size())
         residual = x  # (batch, channel, feature, time)
         x = self.layer_norm1(x)
         x = nn.functional.gelu(x)
@@ -88,7 +87,6 @@ class SpeechRecognitionModel(nn.Module):
 
     def forward(self, x):
         x = self.cnn(x)
-        print(x.size())
         x = self.rescnn_layers(x)
         sizes = x.size()
         x = x.view(sizes[0], sizes[1] * sizes[2], sizes[3])  # (batch, feature, time)
