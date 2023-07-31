@@ -2,7 +2,8 @@ import torch
 import torch.nn as nn
 import torchaudio.transforms as T
 import torchaudio.functional as F
-from Classes import TextTransforms
+from Classes import *
+
 
 train_audio_transforms = nn.Sequential(
     T.MelSpectrogram(sample_rate=16e3, n_mels=128),
@@ -11,9 +12,9 @@ train_audio_transforms = nn.Sequential(
 )
 valid_audio_transforms = T.MelSpectrogram()
 
-text_transform = TextTransforms()
 
 def data_processing(data, data_type='train'):
+    text_transform = TextTransforms()
     spectrograms = []
     labels = []
     input_lengths = []
