@@ -29,10 +29,11 @@ def train_step(model, device, train_loader, criterion, optimizer, scheduler, epo
         scheduler.step()
 
         dt = t.time() - t0
-        if batch_idx % 100 == 0 or batch_idx == data_len - 1:
+        if batch_idx % 100 == 0 or batch_idx == len(train_loader):
             print('Train Epoch: {} [{}/{}] ({:.0f}%)]\tloss: {:.6f}\tTime (s): {:.4f}'.format(
                 epoch, batch_idx * len(spectrograms), data_len, 100.*batch_idx/len(train_loader), loss.item(), dt
             ))
+    return train_loss/len(train_loader)
 
 def test_step(model, device, test_loader, criterion, epoch):
     print('\nevaluating')
@@ -54,7 +55,7 @@ def test_step(model, device, test_loader, criterion, epoch):
 
             decoded_preds, decoded_targets = GreedyDecoder(output.transpose(0, 1), labels, label_lengths)
 
-            if I % 100 == 0 or I == data_test_len - 1:
+            if I % 100 == 0 or I == len(test_loader):
                 print('Test Epoch: {} [{}/{}] ({:.0f}%)]\tloss: {:.6f}'.format(
                 epoch, I * len(spectrograms), data_test_len, 100.*I/len(test_loader), loss.item()
             ))
@@ -70,15 +71,23 @@ def test_step(model, device, test_loader, criterion, epoch):
     avg_cer = sum(test_cer)/len(test_cer)
 
     print('Test set: Average loss: {:.4f}, Average CER: {:4f}\n'.format(test_loss, avg_cer))
-    return test_loss
+    return test_loss, test_cer
 
 def cer(pred, ref):
     return(jiwer.wer(ref,pred))
 
 def train(model, device, train_loader, criterion, optimizer, scheduler, test_loader, epochs):
+    print('training started...')
     t0 = t.time()
+    test_loss = []
+    train_loss = []
+    test_cer = []
     for epoch in range(1, epochs + 1):
-        train_step(model, device, train_loader, criterion, optimizer, scheduler, epoch)
+        trloss = train_step(model, device, train_loader, criterion, optimizer, scheduler, epoch)
+        train_loss.append(trloss)
         if (epoch % 10 == 0):
-            test_step(model, device, test_loader, criterion, epoch)
+            tsloss, tscer = test_step(model, device, test_loader, criterion, epoch)
+            test_loss.append(tsloss)
+            test_cer.append(tscer)
     print('Finished training: took {:.2f}s'.format(t.time()-t0))
+    return test_loss, train_loss, test_cer

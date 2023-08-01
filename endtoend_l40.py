@@ -11,6 +11,7 @@ from preprocessing import *
 from Classes import *
 from Model import SpeechRecognitionModel
 from engine import train
+from utils import *
 
 
 def main():
@@ -22,11 +23,10 @@ def main():
     else:
         device = torch.device("cpu")
     torch.manual_seed(7) 
-    print('using device: {}!'.format(device))
 
     # Hiperparameters
     learning_rate=1e-4
-    batch_size=5
+    batch_size=8
     epochs=100
 
     hparams={
@@ -42,6 +42,15 @@ def main():
         "epochs": epochs
     }
 
+    print('-------------------------------------------')
+    print('device: {}'.format(device))
+    print('learning_rate: {}'.format(learning_rate))
+    print('batch_size: {}'.format(batch_size))
+    print('epochs: {}\n'.format(epochs))
+
+    print('hyperparameters:')
+    print(hparams)
+    print('-------------------------------------------')
     # Loading Dataset
     train_dataset = Latino40Dataset('./dataset/train.json', './dataset')
     test_dataset = Latino40Dataset('./dataset/valid.json', './dataset')
@@ -70,8 +79,11 @@ def main():
                                             anneal_strategy="linear")
 
     # iter_meter = IterMeter()
-    train(model, device, train_loader, criterion, optimizer, scheduler, test_loader, hparams['epochs'])
-    torch.save(model.state_dict(), './model/best_model')
+    losses = train(model, device, train_loader, criterion, optimizer, scheduler, test_loader, hparams['epochs'])
+
+    losses_filename = './training_logs/losses_log_BATCHSIZE_{}_RNNL_{}.json'.format(batch_size, hparams['n_rnn_layers'])
+    save_to_json(losses, losses_filename)
+    torch.save(model.state_dict(), './model/model_BS_{}_NRNN_{}'.format(batch_size, hparams['n_rnn_layers']))
 
 
 
