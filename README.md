@@ -1,6 +1,6 @@
 # Automatic Speech-Recognition
 
-## Running the script
+### Running the script
 
 En la carpeta de src:
 
@@ -8,7 +8,7 @@ En la carpeta de src:
 
 donde `X` es el `BATCH SIZE` e `Y` es `NRNN LAYERS` 
 
-## Modules needed
+### Modules needed
 
 - Numpy
 - Matplotlib
