@@ -31,7 +31,7 @@ def main():
 
     hparams={
         "n_cnn_layers": 2,
-        "n_rnn_layers": 4,
+        "n_rnn_layers": 5,
         "rnn_dim": 512,
         "n_class": 29,
         "n_feats": 128,
