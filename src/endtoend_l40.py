@@ -30,8 +30,8 @@ def main():
     epochs=100
 
     hparams={
-        "n_cnn_layers": 2,
-        "n_rnn_layers": 5,
+        "n_cnn_layers": 8,
+        "n_rnn_layers": 1,
         "rnn_dim": 512,
         "n_class": 29,
         "n_feats": 128,
@@ -81,8 +81,8 @@ def main():
     # iter_meter = IterMeter()
     losses = train(model, device, train_loader, criterion, optimizer, scheduler, test_loader, hparams['epochs'])
 
-    losses_filename = '../training_logs/losses_log_BATCHSIZE_{}_RNNL_{}.json'.format(batch_size, hparams['n_rnn_layers'])
+    losses_filename = '../training_logs/losses_log_BATCHSIZE_{}_CNNL_{}_RNNL_{}.json'.format(batch_size, hparams['n_cnn_layers'], hparams['n_rnn_layers'])
     save_to_json(losses, losses_filename)
-    torch.save(model.state_dict(), '../model/model_BS_{}_NRNN_{}'.format(batch_size, hparams['n_rnn_layers']))
+    torch.save(model.state_dict(), '../model/model_BS_{}_CNNL_{}_NRNN_{}'.format(batch_size, hparams['n_cnn_layers'], hparams['n_rnn_layers']))
 
 main()
