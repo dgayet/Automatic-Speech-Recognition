@@ -30,8 +30,8 @@ def main():
     epochs=100
 
     hparams={
-        "n_cnn_layers": 8,
-        "n_rnn_layers": 1,
+        "n_cnn_layers": 10,
+        "n_rnn_layers": 3,
         "rnn_dim": 512,
         "n_class": 29,
         "n_feats": 128,
