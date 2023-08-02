@@ -46,7 +46,6 @@ ax.plot(np.arange(1,101,10), losses825[0], linewidth=2, label='CNN Layers=2, NRN
 ax.plot(np.arange(1,101,10), losses831[0], linewidth=2, label='CNN Layers=3, NRNN Layers=1, Batch Size=8')
 ax.plot(np.arange(1,101,10), losses851[0], linewidth=2, label='CNN Layers=5, NRNN Layers=1, Batch Size=8')
 ax.plot(np.arange(1,101,10), losses881[0], linewidth=2, label='CNN Layers=8, NRNN Layers=1, Batch Size=8')
-ax.plot(np.arange(1,101,10), losses8101[0], linewidth=2, label='CNN Layers=10, NRNN Layers=1, Batch Size=8')
 
 
 ax.grid()
