@@ -24,8 +24,8 @@ batch_size=8
 epochs=100
 
 hparams={
-    "n_cnn_layers": 2,
-    "n_rnn_layers": 5,
+    "n_cnn_layers": 10,
+    "n_rnn_layers": 3,
     "rnn_dim": 512,
     "n_class": 29,
     "n_feats": 128,
@@ -73,6 +73,7 @@ avg_loss, wer = test(model, device, test_loader, criterion)
 
 print('---------------------------------------------------------------------------------')
 print('\nSTATISTICS:\n')
+print('Total Parameters: {}'.format(total_params))
 print('Average loss: {}'.format(avg_loss))
 print('Word Error Rate vector:\n[')
 [print(w) for w in wer]
