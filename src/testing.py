@@ -24,8 +24,8 @@ batch_size=8
 epochs=100
 
 hparams={
-    "n_cnn_layers": 8,
-    "n_rnn_layers": 1,
+    "n_cnn_layers": 2,
+    "n_rnn_layers": 5,
     "rnn_dim": 512,
     "n_class": 29,
     "n_feats": 128,
@@ -35,18 +35,30 @@ hparams={
     "batch_size": batch_size,
     "epochs": epochs
 }
+
+
+model_filename = '../model/model_BS_{}_CNNL_{}_NRNN_{}'.format(
+    batch_size, 
+    hparams['n_cnn_layers'],
+    hparams['n_rnn_layers'])
+
+print('Model name: {}'.format(model_filename))
+print(hparams)
+
+
 model = SpeechRecognitionModel(
         hparams['n_cnn_layers'], hparams['n_rnn_layers'], hparams['rnn_dim'],
         hparams['n_class'], hparams['n_feats']).to(device)
+
 if use_cuda == True:
-    checkpoint = torch.load('model/model_BS_8_NRNN_1')
-    model.load_state_dict(checkpoint)
+    model.load_state_dict(torch.load(model_filename))
 else:
-    checkpoint = torch.load('model/model_BS_8_NRNN_1', map_location=torch.device('cpu'))
+    checkpoint = torch.load(model_filename, map_location=torch.device('cpu'))
     model = torch.nn.DataParallel(model)
     model.load_state_dict(checkpoint, strict=False)
 
-test_dataset = Latino40Dataset('./dataset/valid.json', './dataset')
+
+test_dataset = Latino40Dataset('../dataset/valid.json', '../dataset')
 kwargs = {'num_workers': 0, 'pin_memory': True} if use_cuda else {}
 test_loader = data.DataLoader(dataset=test_dataset,
                             batch_size=hparams['batch_size'],
@@ -59,5 +71,9 @@ model.eval()
 total_params = sum(p.numel() for p in model.parameters())
 avg_loss, wer = test(model, device, test_loader, criterion)
 
-
-# %%
+print('---------------------------------------------------------------------------------')
+print('\nSTATISTICS:\n')
+print('Average loss: {}'.format(avg_loss))
+print('Word Error Rate vector:\n[')
+[print(w) for w in wer]
+print(']\n---------------------------------------------------------------------------------')
