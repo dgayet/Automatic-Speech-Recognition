@@ -75,6 +75,4 @@ print('-------------------------------------------------------------------------
 print('\nSTATISTICS:\n')
 print('Total Parameters: {}'.format(total_params))
 print('Average loss: {}'.format(avg_loss))
-print('Word Error Rate vector:\n[')
-[print(w) for w in wer]
 print(']\n---------------------------------------------------------------------------------')
