@@ -218,7 +218,7 @@ python -W ignore -u testing.py | tee ../test_log/test_log_BS_X_NCNN_Y_NRNN_Z.txt
 
 donde `X` es el `batch_size`, `Y` es `n_cnn_layers` y `Z` es `n_rnn_layers`.
 
-El script va a generar un log del training redireccionando el contenido de la stdoutput.
+El script va a generar un log del test redireccionando el contenido de la stdoutput.
 
 También se puede correr el script sin guardar el log:
 
