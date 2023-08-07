@@ -1,10 +1,8 @@
 # Automatic Speech-Recognition
 
-Modelo end-to-end de reconocimiento automático del habla, basado en DeepSpeech II. 
+Modelo end-to-end de reconocimiento automático del habla, basado en [Building an End-to-End Speech Recognition Model in PyTorch](https://www.assemblyai.com/blog/end-to-end-speech-recognition-pytorch/). 
 
-El modelo tiene una arquitectura de capas de redes convolucionales seguidas de capas de redes recurrentes y feed forward. La salida del modelo es una matriz de probabilidades para cada caracter en cada instante de tiempo, y esas probabilidades se usan para decodificar la secuencia de texto más probable. 
-
-El entrenamiento está basado en el algoritmo CTC.
+El modelo tiene una arquitectura de capas de redes convolucionales seguidas de capas de redes recurrentes y feed forward. La salida del modelo es una matriz de probabilidades para cada caracter en cada instante de tiempo, y esas probabilidades se usan para decodificar la secuencia de texto más probable. El entrenamiento está basado en el algoritmo CTC.
 
 ## Arquitectura de la red
 
@@ -227,6 +225,9 @@ También se puede correr el script sin guardar el log:
 ```
 python testing.py
 ```
+## Otros Links utiles
 
-
-
+[Backpropagation en RNN](https://towardsdatascience.com/backpropagation-in-rnn-explained-bdf853b4e1c2)
+[Backpropagation en CNN](https://pavisj.medium.com/convolutions-and-backpropagations-46026a8f5d2c)
+[Forward y Backpropagation en GRU](https://medium.com/@mihirkhandekar/forward-and-backpropagation-in-grus-derived-deep-learning-5764f374f3f5)
+[Hinton Lectures - Deep Learning](https://www.cs.toronto.edu/~hinton/coursera_lectures.html)
