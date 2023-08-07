@@ -14,7 +14,7 @@ Todo el pre-procesamiento aplicado al dataset se encuentra en el módulo [prepro
 
 ### Mel Spectrogram
 
-Sobre las señales de audio crudas se aplica el Espectrograma Mel, que consiste en realizar el espectrograma de la señal mediante la FFT y luego transformar la escala de frecuencias a una escala logarítmica, de modo tal que se asemeje a la manera en que los humanos perciben las frecuencias de audio (mayor capacidad de dicernir fracuencias bajas que altas).
+Sobre las señales de audio crudas se aplica el Espectrograma Mel, que consiste en realizar el espectrograma de la señal mediante la FFT y luego transformar la escala de frecuencias a una escala logarítmica, de modo tal que se asemeje a la manera en que los humanos perciben las frecuencias de audio (mayor capacidad de discernir frecuencias bajas que altas).
 
 Se utilizaron 128 coeficientes.
 
