@@ -1,0 +1,5 @@
+jiwer==3.0.2
+matplotlib==3.7.1
+numpy==1.25.0
+torch==2.0.1
+torchaudio==2.0.2
