@@ -77,7 +77,7 @@ El entrenamiento se encuentra en la función `train_step.py` del archivo [engine
 
 La matriz de probabilidades obtenida permite formar una secuencia de caracteres para comparar con los labels de las entradas. El problema más evidente es que el largo de la secuencia de salida obtenida es mayor que el largo de la secuencia target, dado que se tendrán tantos carácteres como time-frames tenga la secuencia de entrada. Además, se desconoce el alineamiento de la secuencia de salida con la de entrada.
 
-El (algoritmo CTC)[https://distill.pub/2017/ctc/?undefined=&ref=assemblyai.com] computa la probabilidad de una secuencia de salida dada una entrada, y eso lo hace sumando las probabilidades de todos los *alineamientos permitidos*. 
+El [algoritmo CTC](https://distill.pub/2017/ctc/?undefined=&ref=assemblyai.com) computa la probabilidad de una secuencia de salida dada una entrada, y eso lo hace sumando las probabilidades de todos los *alineamientos permitidos*. 
 
 Se introduce un caracter blank que permite tener instantes en donde no hay carácter y no colapsar caracteres que deben repetirse.
 
