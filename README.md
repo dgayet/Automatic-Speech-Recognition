@@ -93,7 +93,7 @@ Y el criterio de minimización: $`Loss(W) = \frac{1}{N} \sum\limits_{i=1}^{N} Lo
 
 ### Optimizer
 
-El optimizer que utilizó para actualizar los pesos es [AdamW](https://towardsdatascience.com/why-adamw-matters-736223f31b5d). 
+El optimizer que se utilizó para actualizar los pesos es [AdamW](https://towardsdatascience.com/why-adamw-matters-736223f31b5d). 
 
 Adam es una modificación de Stochastic Gradient Descent, que trackea a lo largo del tiempo (es decir, en cada mini-batch) la media movil del gradiente (llamado momento de primer orden $`m(t)`$) y de su cuadrado (llamado momento de segundo orden $`v(t)`$), los cuales dan una idea de cuánto esta variando el gradiente respecto de iteraciones anteriores. 
 
