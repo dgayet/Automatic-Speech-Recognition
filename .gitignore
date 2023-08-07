@@ -11,5 +11,8 @@ Thumbs.db
 # DATASET
 /dataset
 
+# FIGURAS
+/figs
+
 # cache
 /src/__pycache__
