@@ -24,7 +24,7 @@ En Pytorch se aplica con la función `MelSpectrogram`
 
 La tecnica utilizada consiste en cortar, en cada epoch y para cada sample, bloques aleatorios del espectrograma, tanto en el eje de las frecuencias como en el eje del tiempo. Esto genera una diversidad en el dataset lo cual aumenta su tamaño efectivo.
 
-Se puede realizar en Pytorch con la función `FrecuencyMasking`
+Se puede realizar en Pytorch con la función `FrequencyMasking` y `TimeMasking`
 
 ### Label Mapping
 
