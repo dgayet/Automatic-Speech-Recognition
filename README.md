@@ -55,7 +55,7 @@ Las técnicas de regularización utilizadas son:
 
 A la salida de la última capa de redes convolucionales hay una red feed-forward que se utiliza para acondicionar la salida de la red convolucional para que sea adecuada como entrada de la red recurrente.
 
-### N Bi-direccional GRU Layers
+### N Bi-directional GRU Layers
 
 Se utilizó una red recurrente del tipo GRU, es decir, con compuertas de _update_ y _reset_ que dictan cuánto del estado oculto en un timepo anterior y cuánto de la entrada en el tiempo actual se utiliza para generar el estado oculto en el tiempo actual. 
 
