@@ -227,7 +227,7 @@ python testing.py
 ```
 ## Otros Links utiles
 
-[Backpropagation en RNN](https://towardsdatascience.com/backpropagation-in-rnn-explained-bdf853b4e1c2)
-[Backpropagation en CNN](https://pavisj.medium.com/convolutions-and-backpropagations-46026a8f5d2c)
-[Forward y Backpropagation en GRU](https://medium.com/@mihirkhandekar/forward-and-backpropagation-in-grus-derived-deep-learning-5764f374f3f5)
-[Hinton Lectures - Deep Learning](https://www.cs.toronto.edu/~hinton/coursera_lectures.html)
+- [Backpropagation en RNN](https://towardsdatascience.com/backpropagation-in-rnn-explained-bdf853b4e1c2)
+- [Backpropagation en CNN](https://pavisj.medium.com/convolutions-and-backpropagations-46026a8f5d2c)
+- [Forward y Backpropagation en GRU](https://medium.com/@mihirkhandekar/forward-and-backpropagation-in-grus-derived-deep-learning-5764f374f3f5)
+- [Hinton Lectures - Deep Learning](https://www.cs.toronto.edu/~hinton/coursera_lectures.html)
