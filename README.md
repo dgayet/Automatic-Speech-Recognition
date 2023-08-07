@@ -6,11 +6,23 @@ El modelo tiene una arquitectura de capas de redes convolucionales seguidas de c
 
 El entrenamiento está basado en el algoritmo CTC.
 
-### Arquitectura de la red
+## Arquitectura de la red
 
-``
+![Arquitectura de la red](/readme_pics/architecture.png)
 
-### Modules needed
+## Pre-procesamiento
+
+### Mel Spectrogram
+
+Sobre las señales de audio crudas se aplica el Espectrograma Mel, que consiste en realizar el espectrograma de la señal mediante la FFT y luego transformar la escala de frecuencias a una escala logarítmica, de modo tal que se asemeje a la manera en que los humanos perciben las frecuencias de audio (mayor capacidad de dicernir fracuencias bajas que altas).
+
+### Data Augmentation - SpecAugment
+
+La tecnica utilizada consiste en cortar, en cada epoch y para cada sample, bloques aleatorios del espectrograma, tanto en el eje de las frecuencias como en el eje del tiempo. Esto genera una diversidad en el dataset lo cual aumenta su tamaño efectivo.
+
+Se puede realizar en Pytorch con la función `FrecuencyMasking`
+
+## Modules needed
 
 - Numpy
 - Matplotlib
@@ -18,7 +30,7 @@ El entrenamiento está basado en el algoritmo CTC.
 - Torchaudio
 - Jiwer
 
-### Running the script
+## Running the script
 
 En la carpeta de src:
 
@@ -28,6 +40,6 @@ donde `X` es el `BATCH SIZE`, `Y` es `NCNN LAYERS` y `Z` es `NRNN LAYERS`.
 
 El script va a generar un log del training redireccionando el contenido de la stdoutput.
 
-### Assessment of the model
+## Assessment of the model
 
 El modelo se puede testear 
