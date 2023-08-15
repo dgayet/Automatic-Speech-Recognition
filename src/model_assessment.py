@@ -9,7 +9,7 @@ import matplotlib as mpl
 
 
 #%% plotting an example in time domain and spectrogram
-COLOR = 'white'
+COLOR = 'black'
 mpl.rcParams['text.color'] = COLOR
 mpl.rcParams['axes.labelcolor'] = COLOR
 mpl.rcParams['xtick.color'] = COLOR
@@ -34,7 +34,7 @@ plt.savefig('../figs/demo_signal.png', transparent=True)
 print('Sample rate: {}Hz'.format(sample_rate))
 
 #%%
-spectrogram, label2, input_length, label_length = data_processing([test_dataset[n]], 'test')
+spectrogram, label2, input_length, label_length = data_processing([test_dataset[n]], 'train')
 [fig,ax] = plt.subplots(figsize=(10,7))
 im = ax.imshow(a2db(spectrogram.squeeze()))
 ax.set_title(label, fontsize=16, weight='bold')
@@ -48,7 +48,7 @@ fig.subplots_adjust(right=0.85)
 
 cbar_ax = fig.add_axes([0.88, 0.34, 0.04, 0.31])
 fig.colorbar(im, cax=cbar_ax)
-plt.savefig('../figs/demo_signal_spectrogram.png', transparent=True, bbox_inches='tight', pad_inches=0)
+plt.savefig('../figs/demo_signal_spectrogram_dataug.png', transparent=True, bbox_inches='tight', pad_inches=0)
 
 
 
@@ -147,7 +147,6 @@ parameters = {
     'CNN n=2, RNN n=4, BS=8' : 18959837,
     'CNN n=2, RNN n=5, BS=8' : 23686621,
     'CNN n=3, RNN n=1, BS=8' : 4798237,
-    'CNN n=3, RNN n=4, BS=8' : 18978589,
     'CNN n=5, RNN n=1, BS=8' : 4835741,
     'CNN n=8, RNN n=1, BS=8' : 4891997,
     'CNN n=10, RNN n=3, BS=8' : 14383069
